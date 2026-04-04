@@ -3,7 +3,7 @@
 .pnpm-store/
 
 # Build outputs
-dist/
+# dist/ - tracked for GitHub Pages
 build/
 *.dist
 
