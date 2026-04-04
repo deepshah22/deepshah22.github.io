@@ -1,7 +1,9 @@
-import { useState } from "react";
-import { ChevronDown, ChevronUp, BookOpen, Clock, Target } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ChevronDown, ChevronUp, BookOpen } from "lucide-react";
 
-
+interface Step {
+  [key: string]: string;
+}
 
 interface Unit {
   title: string;
@@ -20,188 +22,380 @@ interface Module {
   units: Unit[];
 }
 
-// Import the course data
-import { course as courseData } from "@/data/ai-course";
-
-const course: Module[] = courseData as Module[];
+import { course } from "@/data/ai-course";
 
 export default function AICrashCourse() {
-  const [expandedModule, setExpandedModule] = useState<number | null>(0);
-  const [expandedUnit, setExpandedUnit] = useState<{ [key: number]: number }>({
-    0: 0,
-  });
+  const [checked, setChecked] = useState<{ [key: string]: boolean }>({});
+  const [activeModule, setActiveModule] = useState(0);
+  const [openUnit, setOpenUnit] = useState<{ [key: number]: number }>({ 0: 0 });
 
-  const toggleModule = (index: number) => {
-    setExpandedModule(expandedModule === index ? null : index);
-    if (expandedModule !== index) {
-      setExpandedUnit({ [index]: 0 });
-    }
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("ai-course-progress");
+      if (saved) setChecked(JSON.parse(saved));
+    } catch {}
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("ai-course-progress", JSON.stringify(checked));
+  }, [checked]);
+
+  const currentModule = course[activeModule];
+  const accentColor = currentModule?.accent || "#50E3C2";
+
+  const toggleStep = (stepId: string) => {
+    setChecked((prev) => ({
+      ...prev,
+      [stepId]: !prev[stepId],
+    }));
   };
 
-  const toggleUnit = (moduleIndex: number, unitIndex: number) => {
-    setExpandedUnit((prev) => ({
+  const toggleUnit = (unitIndex: number) => {
+    setOpenUnit((prev) => ({
       ...prev,
-      [moduleIndex]:
-        prev[moduleIndex] === unitIndex ? -1 : unitIndex,
+      [activeModule]: prev[activeModule] === unitIndex ? -1 : unitIndex,
     }));
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-accent/5">
+    <div
+      style={{
+        minHeight: "100vh",
+        background: "linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%)",
+        padding: "40px 20px",
+        fontFamily: "'DM Sans', sans-serif",
+      }}
+    >
       {/* Header */}
-      <div className="bg-gradient-to-r from-accent/10 to-primary/10 border-b border-border/50 py-16 md:py-24">
-        <div className="container">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="p-3 bg-accent/20 rounded-lg">
-              <BookOpen className="text-accent" size={32} />
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground">
-              AI Crash Course
-            </h1>
-          </div>
-          <p className="text-lg text-muted-foreground max-w-2xl">
-            A comprehensive, practical guide to becoming an AI engineer. From
-            foundations to production systems.
-          </p>
+      <div
+        style={{
+          maxWidth: "1200px",
+          margin: "0 auto",
+          marginBottom: "40px",
+          textAlign: "center",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "12px",
+            marginBottom: "20px",
+          }}
+        >
+          <BookOpen size={40} color={accentColor} />
+          <h1
+            style={{
+              fontSize: "48px",
+              fontWeight: 700,
+              color: "#1a1a1a",
+              margin: 0,
+            }}
+          >
+            AI Crash Course
+          </h1>
         </div>
+        <p
+          style={{
+            fontSize: "18px",
+            color: "#666",
+            maxWidth: "600px",
+            margin: "0 auto",
+          }}
+        >
+          A comprehensive, practical guide to becoming an AI engineer. From
+          foundations to production systems.
+        </p>
       </div>
 
-      {/* Course Content */}
-      <div className="container py-12 md:py-20">
-        <div className="max-w-4xl mx-auto space-y-6">
-          {course.map((module, moduleIndex) => (
-            <div
-              key={moduleIndex}
-              className="border border-border/50 rounded-lg overflow-hidden bg-card/30 hover:bg-card/50 transition-colors"
+      {/* Main Content */}
+      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+        {/* Module Tabs */}
+        <div
+          style={{
+            display: "flex",
+            gap: "12px",
+            marginBottom: "40px",
+            overflowX: "auto",
+            paddingBottom: "12px",
+          }}
+        >
+          {course.map((mod, idx) => (
+            <button
+              key={idx}
+              onClick={() => {
+                setActiveModule(idx);
+                setOpenUnit({ [idx]: 0 });
+              }}
+              style={{
+                padding: "12px 24px",
+                background:
+                  activeModule === idx ? mod.accent : "white",
+                color:
+                  activeModule === idx ? "white" : "#666",
+                border: "none",
+                borderRadius: "8px",
+                fontSize: "14px",
+                fontWeight: 600,
+                cursor: "pointer",
+                whiteSpace: "nowrap",
+                transition: "all 0.3s ease",
+                boxShadow:
+                  activeModule === idx
+                    ? `0 4px 12px ${mod.accent}40`
+                    : "0 1px 3px rgba(0,0,0,0.1)",
+              }}
             >
-              {/* Module Header */}
-              <button
-                onClick={() => toggleModule(moduleIndex)}
-                className="w-full p-6 flex items-start justify-between hover:bg-accent/5 transition-colors text-left"
-                style={{
-                  borderLeft: `4px solid ${module.accent}`,
-                }}
-              >
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
-                    <span
-                      className="text-2xl"
-                      style={{ color: module.accent }}
-                    >
-                      {module.icon}
-                    </span>
-                    <span
-                      className="px-3 py-1 rounded-full text-xs font-semibold"
-                      style={{
-                        backgroundColor: module.accent + "20",
-                        color: module.accent,
-                      }}
-                    >
-                      {module.tag}
-                    </span>
-                  </div>
-                  <h2 className="text-2xl font-bold text-foreground mb-2">
-                    {module.module}: {module.title}
-                  </h2>
-                  <p className="text-muted-foreground mb-3">{module.goal}</p>
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-1">
-                      <Clock size={16} />
-                      {module.duration}
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Target size={16} />
-                      {module.units.length} units
-                    </div>
-                  </div>
-                </div>
-                <div className="ml-4 flex-shrink-0">
-                  {expandedModule === moduleIndex ? (
-                    <ChevronUp className="text-accent" size={24} />
-                  ) : (
-                    <ChevronDown className="text-muted-foreground" size={24} />
-                  )}
-                </div>
-              </button>
-
-              {/* Module Content */}
-              {expandedModule === moduleIndex && (
-                <div className="border-t border-border/30 bg-background/50">
-                  <div className="p-6 space-y-4">
-                    {module.units.map((unit, unitIndex) => (
-                      <div
-                        key={unitIndex}
-                        className="border border-border/30 rounded-lg overflow-hidden bg-card/50"
-                      >
-                        {/* Unit Header */}
-                        <button
-                          onClick={() =>
-                            toggleUnit(moduleIndex, unitIndex)
-                          }
-                          className="w-full p-4 flex items-start justify-between hover:bg-accent/5 transition-colors text-left"
-                        >
-                          <div className="flex-1">
-                            <h3 className="font-semibold text-foreground mb-1">
-                              {unit.title}
-                            </h3>
-                            <p className="text-sm text-muted-foreground">
-                              📚 {unit.resource}
-                            </p>
-                          </div>
-                          <div className="ml-4 flex-shrink-0">
-                            {expandedUnit[moduleIndex] === unitIndex ? (
-                              <ChevronUp
-                                className="text-accent"
-                                size={20}
-                              />
-                            ) : (
-                              <ChevronDown
-                                className="text-muted-foreground"
-                                size={20}
-                              />
-                            )}
-                          </div>
-                        </button>
-
-                        {/* Unit Steps */}
-                        {expandedUnit[moduleIndex] === unitIndex && (
-                          <div className="border-t border-border/20 bg-background/30 p-4">
-                            <ol className="space-y-3">
-                              {unit.steps.map((step, stepIndex) => (
-                                <li
-                                  key={stepIndex}
-                                  className="flex gap-3 text-sm"
-                                >
-                                  <span
-                                    className="font-semibold text-accent flex-shrink-0 mt-0.5"
-                                    style={{
-                                      color: module.accent,
-                                    }}
-                                  >
-                                    {stepIndex + 1}.
-                                  </span>
-                                  <span className="text-muted-foreground leading-relaxed">
-                                    {step}
-                                  </span>
-                                </li>
-                              ))}
-                            </ol>
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
+              {mod.module}
+            </button>
           ))}
         </div>
 
-        {/* Footer CTA */}
-        <div className="mt-16 text-center">
-          <p className="text-muted-foreground text-lg">
-            Ready to master AI? Start with Module 1 and follow the curriculum.
-          </p>
+        {/* Module Content */}
+        {currentModule && (
+          <div
+            style={{
+              background: "white",
+              borderRadius: "12px",
+              padding: "40px",
+              boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
+            }}
+          >
+            {/* Module Header */}
+            <div style={{ marginBottom: "32px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  marginBottom: "16px",
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: "32px",
+                    color: accentColor,
+                  }}
+                >
+                  {currentModule.icon}
+                </span>
+                <span
+                  style={{
+                    padding: "6px 12px",
+                    background: accentColor + "20",
+                    color: accentColor,
+                    borderRadius: "20px",
+                    fontSize: "12px",
+                    fontWeight: 600,
+                  }}
+                >
+                  {currentModule.tag}
+                </span>
+              </div>
+              <h2
+                style={{
+                  fontSize: "32px",
+                  fontWeight: 700,
+                  color: "#1a1a1a",
+                  margin: "0 0 12px 0",
+                }}
+              >
+                {currentModule.title}
+              </h2>
+              <p
+                style={{
+                  fontSize: "16px",
+                  color: "#666",
+                  margin: "12px 0",
+                  lineHeight: "1.6",
+                }}
+              >
+                {currentModule.goal}
+              </p>
+              <div
+                style={{
+                  display: "flex",
+                  gap: "24px",
+                  marginTop: "12px",
+                  fontSize: "14px",
+                  color: "#999",
+                }}
+              >
+                <span>⏱️ {currentModule.duration}</span>
+                <span>📚 {currentModule.units.length} units</span>
+              </div>
+            </div>
+
+            {/* Units */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+              {currentModule.units.map((unit, unitIdx) => (
+                <div
+                  key={unitIdx}
+                  style={{
+                    marginBottom: "16px",
+                    border: "1px solid #e8e4dc",
+                    borderRadius: "8px",
+                    overflow: "hidden",
+                  }}
+                >
+                  {/* Unit Header */}
+                  <button
+                    onClick={() => toggleUnit(unitIdx)}
+                    style={{
+                      width: "100%",
+                      padding: "16px",
+                      background:
+                        openUnit[activeModule] === unitIdx
+                          ? accentColor + "10"
+                          : "white",
+                      border: "none",
+                      textAlign: "left",
+                      cursor: "pointer",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      transition: "all 0.2s ease",
+                    }}
+                  >
+                    <div>
+                      <h3
+                        style={{
+                          fontSize: "16px",
+                          fontWeight: 600,
+                          color: "#1a1a1a",
+                          margin: "0 0 4px 0",
+                        }}
+                      >
+                        {unit.title}
+                      </h3>
+                      <p
+                        style={{
+                          fontSize: "13px",
+                          color: "#999",
+                          margin: 0,
+                        }}
+                      >
+                        📚 {unit.resource}
+                      </p>
+                    </div>
+                    {openUnit[activeModule] === unitIdx ? (
+                      <ChevronUp color={accentColor} size={20} />
+                    ) : (
+                      <ChevronDown color="#999" size={20} />
+                    )}
+                  </button>
+
+                  {/* Unit Steps */}
+                  {openUnit[activeModule] === unitIdx && (
+                    <div
+                      style={{
+                        padding: "16px",
+                        background: "#fafafa",
+                        borderTop: "1px solid #e8e4dc",
+                      }}
+                    >
+                      <ol style={{ margin: 0, paddingLeft: "20px" }}>
+                        {unit.steps.map((step, stepIdx) => {
+                          const stepId = `${activeModule}-${unitIdx}-${stepIdx}`;
+                          const isChecked = checked[stepId];
+
+                          return (
+                            <li
+                              key={stepIdx}
+                              style={{
+                                marginBottom: "12px",
+                                display: "flex",
+                                gap: "12px",
+                                alignItems: "flex-start",
+                              }}
+                            >
+                              <input
+                                type="checkbox"
+                                checked={isChecked || false}
+                                onChange={() => toggleStep(stepId)}
+                                style={{
+                                  marginTop: "4px",
+                                  cursor: "pointer",
+                                  accentColor: accentColor,
+                                }}
+                              />
+                              <span
+                                style={{
+                                  fontSize: "14px",
+                                  color: isChecked ? "#999" : "#666",
+                                  textDecoration: isChecked
+                                    ? "line-through"
+                                    : "none",
+                                  lineHeight: "1.5",
+                                }}
+                              >
+                                {step}
+                              </span>
+                            </li>
+                          );
+                        })}
+                      </ol>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Module navigation */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: "32px",
+            gap: "12px",
+          }}
+        >
+          {activeModule > 0 && (
+            <button
+              onClick={() => {
+                setActiveModule((m) => m - 1);
+                setOpenUnit({ [activeModule - 1]: 0 });
+              }}
+              style={{
+                padding: "10px 20px",
+                background: "#fff",
+                border: "1px solid #e8e4dc",
+                borderRadius: "8px",
+                fontSize: "12px",
+                fontWeight: 600,
+                color: "#666",
+                cursor: "pointer",
+                fontFamily: "'DM Sans', sans-serif",
+              }}
+            >
+              ← {course[activeModule - 1].module}
+            </button>
+          )}
+          {activeModule < course.length - 1 && (
+            <button
+              onClick={() => {
+                setActiveModule((m) => m + 1);
+                setOpenUnit({ [activeModule + 1]: 0 });
+              }}
+              style={{
+                marginLeft: "auto",
+                padding: "10px 20px",
+                background: accentColor,
+                border: "none",
+                borderRadius: "8px",
+                fontSize: "12px",
+                fontWeight: 600,
+                color: "#fff",
+                cursor: "pointer",
+                fontFamily: "'DM Sans', sans-serif",
+              }}
+            >
+              {course[activeModule + 1].module} →
+            </button>
+          )}
         </div>
       </div>
     </div>
