@@ -1,7 +1,8 @@
+import { useEffect } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Navigation from "./components/Navigation";
@@ -10,6 +11,17 @@ import Home from "./pages/Home";
 import AICrashCourse from "./pages/AICrashCourse";
 
 function Router() {
+  const [location, setLocation] = useLocation();
+
+  useEffect(() => {
+    // Handle redirect from 404.html
+    const params = new URLSearchParams(window.location.search);
+    const redirectPath = params.get("_path");
+    if (redirectPath && redirectPath !== "/") {
+      setLocation(redirectPath);
+    }
+  }, [setLocation]);
+
   return (
     <Switch>
       <Route path={"/"} component={Home} />
