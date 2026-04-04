@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
@@ -15,9 +15,9 @@ function Router() {
 
   useEffect(() => {
     // Handle redirect from 404.html
-    const params = new URLSearchParams(window.location.search);
-    const redirectPath = params.get("_path");
+    const redirectPath = sessionStorage.getItem('redirectPath');
     if (redirectPath && redirectPath !== "/") {
+      sessionStorage.removeItem('redirectPath');
       setLocation(redirectPath);
     }
   }, [setLocation]);
