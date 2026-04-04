@@ -9,7 +9,7 @@ import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import AICrashCourse from "./pages/AICrashCourse";
-import AILearningRoadmapPage from "./AiLearningRoadmapPage";
+import AILearningRoadmapPage from "./pages/AILearningRoadmapPage";
 
 
 function Router() {
@@ -28,6 +28,7 @@ function Router() {
     <Switch>
       <Route path={"/"} component={Home} />
       <Route path={"/ai-crash-course"} component={AICrashCourse} />
+      <Route path={"/ai-learning-roadmap"} component={AILearningRoadmapPage} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
