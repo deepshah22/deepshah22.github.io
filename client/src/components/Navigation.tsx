@@ -1,14 +1,9 @@
 import { useState } from "react";
-import { useAuth } from "@/_core/hooks/useAuth";
-import { Button } from "@/components/ui/button";
-import { Link, useLocation } from "wouter";
-import { Menu, X, LogOut, LogIn } from "lucide-react";
-import { getLoginUrl } from "@/const";
+import { Link } from "wouter";
+import { Menu, X } from "lucide-react";
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, logout } = useAuth();
-  const [, navigate] = useLocation();
 
   const scrollToSection = (id: string) => {
     setIsOpen(false);
@@ -16,18 +11,12 @@ export default function Navigation() {
     element?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const handleLogout = async () => {
-    await logout();
-    setIsOpen(false);
-    navigate("/");
-  };
-
   const navItems = [
     { label: "Home", id: "hero" },
     { label: "Experience", id: "experience" },
     { label: "Education", id: "education" },
     { label: "Certifications", id: "certifications" },
-    { label: "Blog", id: "blog" },
+    { label: "Articles", id: "articles" },
   ];
 
   return (
@@ -54,35 +43,6 @@ export default function Navigation() {
             ))}
           </div>
 
-          {/* Desktop Auth */}
-          <div className="hidden md:flex items-center gap-4">
-            {user ? (
-              <>
-                <Link href="/admin/blog">
-                  <Button variant="outline" size="sm">
-                    Admin
-                  </Button>
-                </Link>
-                <Button
-                  onClick={handleLogout}
-                  variant="outline"
-                  size="sm"
-                  className="flex items-center gap-2"
-                >
-                  <LogOut size={16} />
-                  Logout
-                </Button>
-              </>
-            ) : (
-              <a href={getLoginUrl()}>
-                <Button className="bg-accent hover:bg-accent/90 text-accent-foreground flex items-center gap-2">
-                  <LogIn size={16} />
-                  Login
-                </Button>
-              </a>
-            )}
-          </div>
-
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
@@ -104,36 +64,6 @@ export default function Navigation() {
                 {item.label}
               </button>
             ))}
-
-            {/* Mobile Auth */}
-            <div className="border-t border-border pt-4 space-y-2">
-              {user ? (
-                <>
-                  <Link href="/admin/blog">
-                    <a className="block w-full">
-                      <Button variant="outline" className="w-full justify-start">
-                        Admin
-                      </Button>
-                    </a>
-                  </Link>
-                  <Button
-                    onClick={handleLogout}
-                    variant="outline"
-                    className="w-full justify-start"
-                  >
-                    <LogOut size={16} className="mr-2" />
-                    Logout
-                  </Button>
-                </>
-              ) : (
-                <a href={getLoginUrl()} className="block w-full">
-                  <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground justify-start">
-                    <LogIn size={16} className="mr-2" />
-                    Login
-                  </Button>
-                </a>
-              )}
-            </div>
           </div>
         )}
       </div>

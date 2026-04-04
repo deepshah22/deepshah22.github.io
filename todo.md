@@ -11,6 +11,9 @@
 - [x] Set up global styling and color palette (elegant teal/navy theme)
 - [x] Create layout wrapper component
 - [x] Implement mobile-responsive hamburger menu
+- [x] Remove login/logout buttons from navigation
+- [x] Remove admin link from navigation
+- [x] Update navigation items (remove Blog)
 
 ## Hero Section
 - [x] Build hero section with name, title, location, and summary
@@ -33,24 +36,19 @@
 - [x] Display issuing organizations and dates
 
 ## Blog Feature
-- [x] Create blog listing page with post cards
-- [x] Build individual blog post page with markdown rendering
-- [x] Implement blog post creation form
-- [x] Implement blog post editing form
-- [x] Implement blog post deletion functionality
-- [x] Add draft/published status management
+- [ ] REMOVED - Using LinkedIn and Medium instead
 
 ## Admin Interface
-- [x] Create admin dashboard for blog management
-- [x] Implement authentication check (owner only)
-- [x] Build blog post management table/list
-- [x] Add create, edit, delete blog post functionality
-- [x] Implement form validation
+- [ ] REMOVED - No longer needed
+
+## Articles Section
+- [x] Create articles section displaying LinkedIn and Medium links
+- [x] Add article cards with platform icons
+- [x] Link to external articles
 
 ## Contact Section
 - [x] Create contact section with social links
 - [x] Add LinkedIn, GitHub, email links
-- [x] Implement contact form (optional)
 
 ## Styling & Polish
 - [x] Apply elegant design system throughout

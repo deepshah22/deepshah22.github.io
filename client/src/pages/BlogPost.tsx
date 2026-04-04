@@ -44,10 +44,10 @@ export default function BlogPost() {
         <div className="max-w-3xl mx-auto">
           {/* Back button */}
           <Link href="/#blog">
-            <a className="inline-flex items-center gap-2 text-accent hover:text-accent/80 font-semibold mb-8 transition-colors">
+            <div className="inline-flex items-center gap-2 text-accent hover:text-accent/80 font-semibold mb-8 transition-colors cursor-pointer">
               <ArrowLeft size={20} />
               Back to Blog
-            </a>
+            </div>
           </Link>
 
           {/* Header */}

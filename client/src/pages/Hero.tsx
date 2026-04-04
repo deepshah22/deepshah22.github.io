@@ -41,10 +41,10 @@ export default function Hero() {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Button
-                onClick={() => scrollToSection("blog")}
+                onClick={() => scrollToSection("articles")}
                 className="bg-accent hover:bg-accent/90 text-accent-foreground px-8 py-6 text-base font-semibold"
               >
-                Read My Blog
+                Read Articles
               </Button>
               <Button
                 onClick={() => scrollToSection("experience")}

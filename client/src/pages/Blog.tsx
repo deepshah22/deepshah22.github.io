@@ -36,7 +36,7 @@ export default function Blog() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl">
             {posts.map((post) => (
               <Link key={post.id} href={`/blog/${post.slug}`}>
-                <a className="group">
+                <div className="group cursor-pointer">
                   <div className="bg-card rounded-lg p-6 border border-border hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 h-full flex flex-col">
                     {/* Title */}
                     <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors line-clamp-2">
@@ -64,7 +64,7 @@ export default function Blog() {
                       <ArrowRight size={16} />
                     </div>
                   </div>
-                </a>
+                </div>
               </Link>
             ))}
           </div>

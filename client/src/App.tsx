@@ -7,17 +7,11 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
-import BlogPost from "./pages/BlogPost";
-import AdminBlog from "./pages/AdminBlog";
-import BlogEditor from "./pages/BlogEditor";
 
 function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
-      <Route path={"/blog/:slug"} component={BlogPost} />
-      <Route path={"/admin/blog"} component={AdminBlog} />
-      <Route path={"/admin/blog/:id/edit"} component={BlogEditor} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

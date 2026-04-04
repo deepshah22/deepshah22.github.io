@@ -2,7 +2,7 @@ import Hero from "./Hero";
 import Experience from "./Experience";
 import Education from "./Education";
 import Certifications from "./Certifications";
-import Blog from "./Blog";
+import Articles from "./Articles";
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
       <Experience />
       <Education />
       <Certifications />
-      <Blog />
+      <Articles />
     </div>
   );
 }
