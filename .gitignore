@@ -3,9 +3,9 @@
 .pnpm-store/
 
 # Build outputs
-# dist/ - tracked for GitHub Pages
 build/
 *.dist
+# docs/ - tracked for GitHub Pages
 
 # Environment variables
 .env
