@@ -2,7 +2,7 @@ import Hero from "./Hero";
 import Experience from "./Experience";
 import Education from "./Education";
 import Certifications from "./Certifications";
-import AiLearningRoadmapPage from "./AILearningRoadmapPage";
+import AILearningRoadmapPage from "./AILearningRoadmapPage";
 import AICrashCourse from "./AICrashCourse";
 
 export default function Home() {
@@ -13,7 +13,7 @@ export default function Home() {
       <Education />
       <Certifications />
       <AICrashCourse />
-      <AiLearningRoadmapPage />
+      <AILearningRoadmapPage />
     </div>
   );
 }
