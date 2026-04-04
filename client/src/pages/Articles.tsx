@@ -25,7 +25,7 @@ const articles: Article[] = [
     title: "Modern Software Engineering Practices",
     excerpt: "A deep dive into best practices for software development in 2024.",
     platform: "medium",
-    url: "https://medium.com/@deepshah",
+    url: "https://medium.com/@deepshah22/",
     date: "2024",
   },
   {
@@ -141,7 +141,7 @@ export default function Articles() {
                 ))}
               </div>
               <a
-                href="https://medium.com/@deepshah"
+                href="https://medium.com/@deepshah22/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block mt-6"

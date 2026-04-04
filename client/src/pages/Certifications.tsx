@@ -1,4 +1,4 @@
-import { portfolioData } from "@shared/portfolioData";
+import { portfolioData } from "@/lib/portfolioData";
 import { Award } from "lucide-react";
 
 export default function Certifications() {
@@ -28,7 +28,7 @@ export default function Certifications() {
 
               {/* Certificate name */}
               <h3 className="text-lg font-bold text-foreground mb-2 line-clamp-2">
-                {cert.name}
+                {cert.title}
               </h3>
 
               {/* Issuer */}

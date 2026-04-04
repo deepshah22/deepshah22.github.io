@@ -1,4 +1,4 @@
-import { portfolioData } from "@shared/portfolioData";
+import { portfolioData } from "@/lib/portfolioData";
 import { Briefcase } from "lucide-react";
 
 export default function Experience() {
@@ -38,7 +38,7 @@ export default function Experience() {
                     <div className="bg-background rounded-lg p-6 border border-border hover:border-accent/50 transition-colors">
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-2">
                         <h3 className="text-xl font-bold text-foreground">{exp.role}</h3>
-                        <span className="text-sm font-medium text-accent">{exp.duration}</span>
+                        <span className="text-sm font-medium text-accent">{exp.tenure}</span>
                       </div>
                       
                       <p className="text-base font-semibold text-muted-foreground mb-3">

@@ -1,4 +1,4 @@
-import { portfolioData } from "@shared/portfolioData";
+import { portfolioData } from "@/lib/portfolioData";
 import { GraduationCap } from "lucide-react";
 
 export default function Education() {
@@ -38,7 +38,7 @@ export default function Education() {
                     <div className="bg-card rounded-lg p-6 border border-border hover:border-accent/50 transition-colors">
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-2">
                         <h3 className="text-xl font-bold text-foreground">{edu.degree}</h3>
-                        <span className="text-sm font-medium text-accent">{edu.year}</span>
+                        <span className="text-sm font-medium text-accent">{edu.tenure}</span>
                       </div>
                       
                       <p className="text-base font-semibold text-muted-foreground mb-2">

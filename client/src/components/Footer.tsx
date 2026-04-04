@@ -1,4 +1,4 @@
-import { portfolioData } from "@shared/portfolioData";
+import { portfolioData } from "@/lib/portfolioData";
 import { Mail, Linkedin, Github } from "lucide-react";
 
 export default function Footer() {
