@@ -16,7 +16,6 @@ export default function Navigation() {
     { label: "Experience", id: "experience" },
     { label: "Education", id: "education" },
     { label: "Certifications", id: "certifications" },
-    { label: "Articles", id: "articles" },
   ];
 
   return (

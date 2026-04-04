@@ -28,11 +28,7 @@ export default function Footer() {
                   Experience
                 </a>
               </li>
-              <li>
-                <a href="#articles" className="text-muted-foreground hover:text-accent transition-colors">
-                  Articles
-                </a>
-              </li>
+
             </ul>
           </div>
 
