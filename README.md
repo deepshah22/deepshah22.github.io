@@ -1,6 +1,6 @@
 # Deep Shah - Software Engineer Portfolio
 
-A modern, responsive portfolio website showcasing professional experience, education, certifications, and articles.
+A modern, responsive portfolio website showcasing professional experience, education, certifications, and articles
 
 ## Features
 
