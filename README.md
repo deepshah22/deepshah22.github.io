@@ -127,4 +127,4 @@ MIT
 
 - LinkedIn: [linkedin.com/in/deepshah22](https://linkedin.com/in/deepshah22)
 - GitHub: [github.com/deepshah22](https://github.com/deepshah22)
-- Email: dsshah22@gmail.com
+
