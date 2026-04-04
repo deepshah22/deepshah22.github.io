@@ -9,6 +9,8 @@ import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import AICrashCourse from "./pages/AICrashCourse";
+import AILearningRoadmapPage from "./AiLearningRoadmapPage";
+
 
 function Router() {
   const [location, setLocation] = useLocation();
