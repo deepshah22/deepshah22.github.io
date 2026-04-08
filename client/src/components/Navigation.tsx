@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { Menu, X } from "lucide-react";
+import AIDropdown from "./AIDropdown";
 
 type SectionNavItem = {
   label: string;
@@ -30,7 +31,6 @@ export default function Navigation() {
     { label: "Experience", id: "experience" },
     { label: "Education", id: "education" },
     { label: "Certifications", id: "certifications" },
-    { label: "AI Crash Course", href: "/ai-crash-course" },
   ];
 
   return (
@@ -66,6 +66,7 @@ export default function Navigation() {
                 </button>
               )
             ))}
+            <AIDropdown />
           </div>
 
           {/* Mobile Menu Button */}
@@ -100,6 +101,25 @@ export default function Navigation() {
                 </button>
               )
             ))}
+            <div className="px-4 py-2 space-y-2 border-t border-border pt-4">
+              <p className="text-sm font-medium text-muted-foreground">AI</p>
+              <Link href="/ai-crash-course">
+                <a
+                  onClick={() => setIsOpen(false)}
+                  className="block w-full text-left px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-accent/10 rounded-lg transition-colors text-sm"
+                >
+                  Crash Course
+                </a>
+              </Link>
+              <Link href="/ai-learning-roadmap">
+                <a
+                  onClick={() => setIsOpen(false)}
+                  className="block w-full text-left px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-accent/10 rounded-lg transition-colors text-sm"
+                >
+                  Learning Roadmap
+                </a>
+              </Link>
+            </div>
           </div>
         )}
       </div>
