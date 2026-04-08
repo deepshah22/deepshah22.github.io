@@ -2,6 +2,20 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { Menu, X } from "lucide-react";
 
+type SectionNavItem = {
+  label: string;
+  id: string;
+};
+
+type RouteNavItem = {
+  label: string;
+  href: string;
+};
+
+type NavItem = SectionNavItem | RouteNavItem;
+
+const isRouteItem = (item: NavItem): item is RouteNavItem => "href" in item;
+
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -11,11 +25,12 @@ export default function Navigation() {
     element?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const navItems = [
+  const navItems: NavItem[] = [
     { label: "Home", id: "hero" },
     { label: "Experience", id: "experience" },
     { label: "Education", id: "education" },
     { label: "Certifications", id: "certifications" },
+    { label: "AI Roadmap", href: "/ai-learning-roadmap" },
   ];
 
   return (
@@ -32,13 +47,24 @@ export default function Navigation() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className="text-muted-foreground hover:text-foreground transition-colors font-medium"
-              >
-                {item.label}
-              </button>
+              isRouteItem(item) ? (
+                <Link key={item.href} href={item.href}>
+                  <a
+                    onClick={() => setIsOpen(false)}
+                    className="text-muted-foreground hover:text-foreground transition-colors font-medium"
+                  >
+                    {item.label}
+                  </a>
+                </Link>
+              ) : (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className="text-muted-foreground hover:text-foreground transition-colors font-medium"
+                >
+                  {item.label}
+                </button>
+              )
             ))}
           </div>
 
@@ -55,13 +81,24 @@ export default function Navigation() {
         {isOpen && (
           <div className="md:hidden border-t border-border py-4 space-y-4">
             {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className="block w-full text-left px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-accent/10 rounded-lg transition-colors font-medium"
-              >
-                {item.label}
-              </button>
+              isRouteItem(item) ? (
+                <Link key={item.href} href={item.href}>
+                  <a
+                    onClick={() => setIsOpen(false)}
+                    className="block w-full text-left px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-accent/10 rounded-lg transition-colors font-medium"
+                  >
+                    {item.label}
+                  </a>
+                </Link>
+              ) : (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className="block w-full text-left px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-accent/10 rounded-lg transition-colors font-medium"
+                >
+                  {item.label}
+                </button>
+              )
             ))}
           </div>
         )}
