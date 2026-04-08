@@ -30,7 +30,7 @@ export default function Navigation() {
     { label: "Experience", id: "experience" },
     { label: "Education", id: "education" },
     { label: "Certifications", id: "certifications" },
-    { label: "AI Roadmap", href: "/ai-learning-roadmap" },
+    { label: "AI Crash Course", href: "/ai-crash-course" },
   ];
 
   return (
