@@ -1,10 +1,24 @@
 import { useState } from "react";
-import { Link, useLocation } from "wouter";
+import { Link } from "wouter";
 import { Menu, X } from "lucide-react";
+import AIDropdown from "./AIDropdown";
+
+type SectionNavItem = {
+  label: string;
+  id: string;
+};
+
+type RouteNavItem = {
+  label: string;
+  href: string;
+};
+
+type NavItem = SectionNavItem | RouteNavItem;
+
+const isRouteItem = (item: NavItem): item is RouteNavItem => "href" in item;
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
-  const [, setLocation] = useLocation();
 
   const scrollToSection = (id: string) => {
     setIsOpen(false);
@@ -12,17 +26,11 @@ export default function Navigation() {
     element?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const handleNavigate = (path: string) => {
-    setIsOpen(false);
-    setLocation(path);
-  };
-
-  const navItems = [
+  const navItems: NavItem[] = [
     { label: "Home", id: "hero" },
     { label: "Experience", id: "experience" },
     { label: "Education", id: "education" },
     { label: "Certifications", id: "certifications" },
-    { label: "AI Crash Course", path: "/ai-crash-course" },
   ];
 
   return (
@@ -39,14 +47,26 @@ export default function Navigation() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
-              <button
-                key={item.label}
-                onClick={() => item.path ? handleNavigate(item.path) : scrollToSection(item.id!)}
-                className="text-muted-foreground hover:text-foreground transition-colors font-medium"
-              >
-                {item.label}
-              </button>
+              isRouteItem(item) ? (
+                <Link key={item.href} href={item.href}>
+                  <a
+                    onClick={() => setIsOpen(false)}
+                    className="text-muted-foreground hover:text-foreground transition-colors font-medium"
+                  >
+                    {item.label}
+                  </a>
+                </Link>
+              ) : (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className="text-muted-foreground hover:text-foreground transition-colors font-medium"
+                >
+                  {item.label}
+                </button>
+              )
             ))}
+            <AIDropdown />
           </div>
 
           {/* Mobile Menu Button */}
@@ -62,14 +82,44 @@ export default function Navigation() {
         {isOpen && (
           <div className="md:hidden border-t border-border py-4 space-y-4">
             {navItems.map((item) => (
-              <button
-                key={item.label}
-                onClick={() => item.path ? handleNavigate(item.path) : scrollToSection(item.id!)}
-                className="block w-full text-left px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-accent/10 rounded-lg transition-colors font-medium"
-              >
-                {item.label}
-              </button>
+              isRouteItem(item) ? (
+                <Link key={item.href} href={item.href}>
+                  <a
+                    onClick={() => setIsOpen(false)}
+                    className="block w-full text-left px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-accent/10 rounded-lg transition-colors font-medium"
+                  >
+                    {item.label}
+                  </a>
+                </Link>
+              ) : (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className="block w-full text-left px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-accent/10 rounded-lg transition-colors font-medium"
+                >
+                  {item.label}
+                </button>
+              )
             ))}
+            <div className="px-4 py-2 space-y-2 border-t border-border pt-4">
+              <p className="text-sm font-medium text-muted-foreground">AI</p>
+              <Link href="/ai-crash-course">
+                <a
+                  onClick={() => setIsOpen(false)}
+                  className="block w-full text-left px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-accent/10 rounded-lg transition-colors text-sm"
+                >
+                  Crash Course
+                </a>
+              </Link>
+              <Link href="/ai-learning-roadmap">
+                <a
+                  onClick={() => setIsOpen(false)}
+                  className="block w-full text-left px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-accent/10 rounded-lg transition-colors text-sm"
+                >
+                  Learning Roadmap
+                </a>
+              </Link>
+            </div>
           </div>
         )}
       </div>
