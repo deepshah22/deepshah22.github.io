@@ -1,11 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { portfolioData } from "@/lib/portfolioData";
-import { Mail, Linkedin, Github, ArrowDown, BookOpen } from "lucide-react";
-import { useLocation } from "wouter";
+import { Mail, Linkedin, Github, ArrowDown } from "lucide-react";
 
 export default function Hero() {
-  const [, setLocation] = useLocation();
-  
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     element?.scrollIntoView({ behavior: "smooth" });
@@ -44,16 +41,8 @@ export default function Hero() {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Button
-                onClick={() => setLocation("/ai-crash-course")}
-                className="bg-accent hover:bg-accent/90 text-accent-foreground px-8 py-6 text-base font-semibold flex items-center gap-2"
-              >
-                <BookOpen size={20} />
-                AI Crash Course
-              </Button>
-              <Button
                 onClick={() => scrollToSection("experience")}
-                variant="outline"
-                className="px-8 py-6 text-base font-semibold"
+                className="bg-accent hover:bg-accent/90 text-accent-foreground px-8 py-6 text-base font-semibold"
               >
                 View Experience
               </Button>
