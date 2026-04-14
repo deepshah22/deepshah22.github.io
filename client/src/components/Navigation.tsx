@@ -33,6 +33,10 @@ export default function Navigation() {
     { label: "Certifications", id: "certifications" },
   ];
 
+  const externalLinks: RouteNavItem[] = [
+    { label: "Blogs", href: "https://deepshah22.substack.com" },
+  ];
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="container">
@@ -67,6 +71,17 @@ export default function Navigation() {
               )
             ))}
             <AIDropdown />
+            {externalLinks.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors font-medium"
+              >
+                {item.label}
+              </a>
+            ))}
           </div>
 
           {/* Mobile Menu Button */}
@@ -101,8 +116,19 @@ export default function Navigation() {
                 </button>
               )
             ))}
+            {externalLinks.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full text-left px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-accent/10 rounded-lg transition-colors font-medium"
+              >
+                {item.label}
+              </a>
+            ))}
             <div className="px-4 py-2 space-y-2 border-t border-border pt-4">
-              <p className="text-sm font-medium text-muted-foreground">AI</p>
+              <p className="text-sm font-medium text-muted-foreground">Resources</p>
               <Link href="/ai-crash-course">
                 <a
                   onClick={() => setIsOpen(false)}
@@ -119,6 +145,14 @@ export default function Navigation() {
                   Learning Roadmap
                 </a>
               </Link>
+              <a
+                href="https://deepshah22.substack.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full text-left px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-accent/10 rounded-lg transition-colors text-sm"
+              >
+                Blogs
+              </a>
             </div>
           </div>
         )}
