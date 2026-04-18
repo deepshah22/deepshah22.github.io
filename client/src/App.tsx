@@ -10,6 +10,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import AICrashCourse from "./pages/AICrashCourse";
 import AILearningRoadmapPage from "./pages/AILearningRoadmapPage";
+import DistributedDatabasesCoursePage from "./pages/DistributedDatabasesCoursePage";
 
 
 function Router() {
@@ -29,6 +30,7 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/ai-crash-course"} component={AICrashCourse} />
       <Route path={"/ai-learning-roadmap"} component={AILearningRoadmapPage} />
+      <Route path={"/distributed-databases"} component={DistributedDatabasesCoursePage} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

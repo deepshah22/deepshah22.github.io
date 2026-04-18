@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { Menu, X } from "lucide-react";
-import AIDropdown from "./AIDropdown";
+import CoursesDropdown from "./CoursesDropdown";
 
 type SectionNavItem = {
   label: string;
@@ -70,7 +70,7 @@ export default function Navigation() {
                 </button>
               )
             ))}
-            <AIDropdown />
+            <CoursesDropdown />
             {externalLinks.map((item) => (
               <a
                 key={item.href}
@@ -128,7 +128,7 @@ export default function Navigation() {
               </a>
             ))}
             <div className="px-4 py-2 space-y-2 border-t border-border pt-4">
-              <p className="text-sm font-medium text-muted-foreground">Resources</p>
+              <p className="text-sm font-medium text-muted-foreground">Courses</p>
               <Link href="/ai-crash-course">
                 <a
                   onClick={() => setIsOpen(false)}
@@ -143,6 +143,14 @@ export default function Navigation() {
                   className="block w-full text-left px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-accent/10 rounded-lg transition-colors text-sm"
                 >
                   Learning Roadmap
+                </a>
+              </Link>
+              <Link href="/distributed-databases">
+                <a
+                  onClick={() => setIsOpen(false)}
+                  className="block w-full text-left px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-accent/10 rounded-lg transition-colors text-sm"
+                >
+                  Distributed Databases
                 </a>
               </Link>
               <a
