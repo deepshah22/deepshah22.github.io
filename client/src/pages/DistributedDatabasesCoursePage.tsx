@@ -4,116 +4,115 @@ import distributedDatabaseCourse from "../data/distributedDatabaseCourse_clean";
 type ModuleType = (typeof distributedDatabaseCourse.modules)[number];
 type LessonType = ModuleType["lessons"][number];
 
-const shell: React.CSSProperties = {
+const pageStyle: React.CSSProperties = {
   minHeight: "100vh",
-  background:
-    "linear-gradient(180deg, #0f172a 0%, #111827 35%, #0b1020 100%)",
-  color: "#e5e7eb",
+  background: "#f8fafc",
+  color: "#0f172a",
+  scrollBehavior: "smooth",
 };
 
-const page: React.CSSProperties = {
-  maxWidth: "1320px",
+const containerStyle: React.CSSProperties = {
+  maxWidth: "1380px",
   margin: "0 auto",
-  padding: "40px 20px 80px",
+  padding: "28px 20px 64px",
 };
 
-const heroCard: React.CSSProperties = {
-  background: "rgba(15, 23, 42, 0.72)",
-  border: "1px solid rgba(148, 163, 184, 0.18)",
-  borderRadius: "24px",
+const heroStyle: React.CSSProperties = {
+  background: "linear-gradient(180deg, #ffffff 0%, #f8fbff 100%)",
+  border: "1px solid #dbe7f5",
+  borderRadius: "28px",
   padding: "28px",
-  boxShadow: "0 24px 80px rgba(0, 0, 0, 0.28)",
-  backdropFilter: "blur(12px)",
+  boxShadow: "0 18px 50px rgba(15, 23, 42, 0.06)",
 };
 
-const pill: React.CSSProperties = {
+const badgeStyle: React.CSSProperties = {
   display: "inline-flex",
   alignItems: "center",
-  gap: "8px",
   padding: "8px 12px",
   borderRadius: "999px",
+  background: "#e0f2fe",
+  color: "#075985",
   fontSize: "12px",
   fontWeight: 700,
-  letterSpacing: "0.04em",
+  letterSpacing: "0.05em",
   textTransform: "uppercase",
-  background: "rgba(59, 130, 246, 0.14)",
-  border: "1px solid rgba(96, 165, 250, 0.35)",
-  color: "#bfdbfe",
 };
 
-const heroTitle: React.CSSProperties = {
-  margin: "18px 0 10px",
-  fontSize: "clamp(32px, 5vw, 56px)",
+const heroTitleStyle: React.CSSProperties = {
+  margin: "16px 0 10px",
+  fontSize: "clamp(32px, 5vw, 52px)",
   lineHeight: 1.05,
-  fontWeight: 800,
   letterSpacing: "-0.04em",
-  color: "#f8fafc",
+  fontWeight: 800,
+  color: "#0f172a",
 };
 
-const heroSubtitle: React.CSSProperties = {
-  margin: "0 0 22px",
-  maxWidth: "860px",
+const heroSubtitleStyle: React.CSSProperties = {
+  margin: 0,
+  maxWidth: "920px",
   fontSize: "18px",
   lineHeight: 1.7,
-  color: "#cbd5e1",
+  color: "#334155",
 };
 
-const infoGrid: React.CSSProperties = {
+const quickInfoGrid: React.CSSProperties = {
   display: "grid",
   gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
   gap: "14px",
   marginTop: "22px",
 };
 
-const infoCard: React.CSSProperties = {
-  padding: "16px 18px",
+const quickInfoCard: React.CSSProperties = {
+  background: "#ffffff",
+  border: "1px solid #e2e8f0",
   borderRadius: "18px",
-  background: "rgba(15, 23, 42, 0.88)",
-  border: "1px solid rgba(148, 163, 184, 0.16)",
+  padding: "16px",
 };
 
-const sectionLabel: React.CSSProperties = {
+const quickInfoLabel: React.CSSProperties = {
   margin: 0,
   fontSize: "12px",
-  letterSpacing: "0.08em",
-  textTransform: "uppercase",
-  color: "#93c5fd",
   fontWeight: 700,
+  letterSpacing: "0.06em",
+  textTransform: "uppercase",
+  color: "#0284c7",
 };
 
-const sectionText: React.CSSProperties = {
+const quickInfoText: React.CSSProperties = {
   margin: "8px 0 0",
   fontSize: "14px",
-  lineHeight: 1.65,
-  color: "#cbd5e1",
+  lineHeight: 1.7,
+  color: "#475569",
 };
 
-const layout: React.CSSProperties = {
+const mainLayout: React.CSSProperties = {
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+  gridTemplateColumns: "320px minmax(0, 1fr)",
   gap: "24px",
-  marginTop: "28px",
+  alignItems: "start",
+  marginTop: "24px",
 };
 
-const sidebar: React.CSSProperties = {
+const sidebarStyle: React.CSSProperties = {
   position: "sticky",
-  top: "24px",
-  alignSelf: "start",
-  background: "rgba(15, 23, 42, 0.76)",
-  border: "1px solid rgba(148, 163, 184, 0.18)",
+  top: "20px",
+  background: "#ffffff",
+  border: "1px solid #e2e8f0",
   borderRadius: "24px",
-  padding: "20px",
-  boxShadow: "0 20px 60px rgba(0, 0, 0, 0.24)",
+  padding: "18px",
+  boxShadow: "0 14px 36px rgba(15, 23, 42, 0.05)",
+  maxHeight: "calc(100vh - 40px)",
+  overflowY: "auto",
 };
 
-const navTitle: React.CSSProperties = {
+const sidebarTitle: React.CSSProperties = {
   margin: "0 0 12px",
   fontSize: "16px",
   fontWeight: 800,
-  color: "#f8fafc",
+  color: "#0f172a",
 };
 
-const navList: React.CSSProperties = {
+const navListStyle: React.CSSProperties = {
   listStyle: "none",
   margin: 0,
   padding: 0,
@@ -121,82 +120,89 @@ const navList: React.CSSProperties = {
   gap: "10px",
 };
 
-const navItem: React.CSSProperties = {
+const navItemStyle: React.CSSProperties = {
   display: "block",
   textDecoration: "none",
   padding: "12px 14px",
   borderRadius: "16px",
-  background: "rgba(30, 41, 59, 0.72)",
-  border: "1px solid rgba(148, 163, 184, 0.14)",
-  color: "#dbeafe",
+  background: "#f8fafc",
+  border: "1px solid #e2e8f0",
+  color: "#0f172a",
   fontSize: "14px",
-  lineHeight: 1.45,
+  lineHeight: 1.5,
+  transition: "all 180ms ease",
 };
 
-const navSubList: React.CSSProperties = {
+const navSubListStyle: React.CSSProperties = {
   listStyle: "none",
-  margin: "10px 0 0 0",
+  margin: "8px 0 0",
   padding: "0 0 0 10px",
   display: "grid",
   gap: "8px",
 };
 
-const navSubItem: React.CSSProperties = {
+const navSubItemStyle: React.CSSProperties = {
   display: "block",
   textDecoration: "none",
-  padding: "8px 10px",
+  padding: "9px 10px",
   borderRadius: "12px",
-  background: "rgba(15, 23, 42, 0.5)",
-  border: "1px solid rgba(148, 163, 184, 0.1)",
-  color: "#cbd5e1",
+  background: "#ffffff",
+  border: "1px solid #e2e8f0",
+  color: "#475569",
   fontSize: "13px",
   lineHeight: 1.45,
 };
 
-const contentWrap: React.CSSProperties = {
+const contentStyle: React.CSSProperties = {
   display: "grid",
   gap: "22px",
 };
 
-const moduleCard: React.CSSProperties = {
-  background: "rgba(15, 23, 42, 0.78)",
-  border: "1px solid rgba(148, 163, 184, 0.18)",
-  borderRadius: "24px",
+const sectionCard: React.CSSProperties = {
+  background: "#ffffff",
+  border: "1px solid #e2e8f0",
+  borderRadius: "26px",
   padding: "24px",
-  boxShadow: "0 20px 60px rgba(0, 0, 0, 0.2)",
+  boxShadow: "0 16px 42px rgba(15, 23, 42, 0.05)",
+  scrollMarginTop: "24px",
 };
 
-const moduleHeader: React.CSSProperties = {
-  marginBottom: "18px",
-  paddingBottom: "18px",
-  borderBottom: "1px solid rgba(148, 163, 184, 0.14)",
+const sectionLabel: React.CSSProperties = {
+  margin: 0,
+  fontSize: "12px",
+  fontWeight: 700,
+  textTransform: "uppercase",
+  letterSpacing: "0.06em",
+  color: "#0284c7",
 };
 
-const moduleTitle: React.CSSProperties = {
-  margin: "0 0 8px",
-  fontSize: "28px",
+const sectionTitle: React.CSSProperties = {
+  margin: "8px 0 10px",
+  fontSize: "30px",
   lineHeight: 1.2,
   fontWeight: 800,
-  color: "#f8fafc",
+  color: "#0f172a",
 };
 
-const moduleOverview: React.CSSProperties = {
+const sectionOverview: React.CSSProperties = {
   margin: 0,
   fontSize: "16px",
-  lineHeight: 1.75,
-  color: "#cbd5e1",
+  lineHeight: 1.8,
+  color: "#475569",
 };
 
-const lessonsGrid: React.CSSProperties = {
+const lessonGrid: React.CSSProperties = {
   display: "grid",
   gap: "18px",
+  marginTop: "18px",
 };
 
 const lessonCard: React.CSSProperties = {
-  background: "rgba(2, 6, 23, 0.58)",
-  border: "1px solid rgba(148, 163, 184, 0.14)",
-  borderRadius: "20px",
-  padding: "20px",
+  background: "#fdfefe",
+  border: "1px solid #e2e8f0",
+  borderRadius: "22px",
+  padding: "22px",
+  scrollMarginTop: "24px",
 };
 
 const lessonTitle: React.CSSProperties = {
@@ -204,72 +210,74 @@ const lessonTitle: React.CSSProperties = {
   fontSize: "22px",
   lineHeight: 1.3,
   fontWeight: 800,
-  color: "#f8fafc",
+  color: "#0f172a",
 };
 
 const lessonGoal: React.CSSProperties = {
   margin: "10px 0 0",
   fontSize: "15px",
-  lineHeight: 1.7,
-  color: "#dbeafe",
+  lineHeight: 1.8,
+  color: "#334155",
 };
 
-const blockTitle: React.CSSProperties = {
+const blockLabel: React.CSSProperties = {
   margin: "18px 0 10px",
-  fontSize: "14px",
-  letterSpacing: "0.04em",
-  textTransform: "uppercase",
+  fontSize: "13px",
   fontWeight: 800,
-  color: "#93c5fd",
+  textTransform: "uppercase",
+  letterSpacing: "0.05em",
+  color: "#0ea5e9",
 };
 
-const chips: React.CSSProperties = {
+const chipWrap: React.CSSProperties = {
   display: "flex",
   flexWrap: "wrap",
   gap: "10px",
 };
 
-const chip: React.CSSProperties = {
+const chipStyle: React.CSSProperties = {
   display: "inline-flex",
   alignItems: "center",
   padding: "8px 12px",
   borderRadius: "999px",
+  background: "#eef6ff",
+  border: "1px solid #cfe4ff",
+  color: "#075985",
   fontSize: "13px",
-  lineHeight: 1.2,
-  color: "#dbeafe",
-  background: "rgba(30, 41, 59, 0.8)",
-  border: "1px solid rgba(148, 163, 184, 0.14)",
 };
 
-const textList: React.CSSProperties = {
+const listStyle: React.CSSProperties = {
   margin: 0,
   paddingLeft: "20px",
-  color: "#cbd5e1",
-  lineHeight: 1.8,
+  color: "#475569",
+  lineHeight: 1.85,
 };
 
-const finalCard: React.CSSProperties = {
-  background:
-    "linear-gradient(180deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.9) 100%)",
-  border: "1px solid rgba(148, 163, 184, 0.18)",
-  borderRadius: "24px",
-  padding: "24px",
-  boxShadow: "0 20px 60px rgba(0, 0, 0, 0.22)",
+const finalSectionStyle: React.CSSProperties = {
+  ...sectionCard,
+  background: "linear-gradient(180deg, #ffffff 0%, #f8fbff 100%)",
 };
 
-const footerText: React.CSSProperties = {
+const footerStyle: React.CSSProperties = {
   marginTop: "26px",
-  fontSize: "14px",
   textAlign: "center",
-  color: "#94a3b8",
+  fontSize: "14px",
+  color: "#64748b",
 };
 
-const mobileNote: React.CSSProperties = {
-  marginTop: "14px",
-  fontSize: "13px",
-  lineHeight: 1.6,
-  color: "#94a3b8",
-};
+function smoothNavProps(targetId: string) {
+  return {
+    href: `#${targetId}`,
+    onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
+      e.preventDefault();
+      const el = document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        window.history.replaceState(null, "", `#${targetId}`);
+      }
+    },
+  };
+}
 
 function LessonSection({ lesson }: { lesson: LessonType }) {
   return (
@@ -278,10 +286,10 @@ function LessonSection({ lesson }: { lesson: LessonType }) {
       <p style={lessonGoal}>{lesson.goal}</p>
 
       <div>
-        <h4 style={blockTitle}>Core Concepts</h4>
-        <div style={chips}>
+        <h4 style={blockLabel}>Core Concepts</h4>
+        <div style={chipWrap}>
           {lesson.concepts.map((concept) => (
-            <span key={concept} style={chip}>
+            <span key={concept} style={chipStyle}>
               {concept}
             </span>
           ))}
@@ -289,26 +297,26 @@ function LessonSection({ lesson }: { lesson: LessonType }) {
       </div>
 
       <div>
-        <h4 style={blockTitle}>Explanation</h4>
-        <ul style={textList}>
+        <h4 style={blockLabel}>Explanation</h4>
+        <ul style={listStyle}>
           {lesson.explanation.map((item, index) => (
-            <li key={`${lesson.id}-exp-${index}`}>{item}</li>
+            <li key={`${lesson.id}-explanation-${index}`}>{item}</li>
           ))}
         </ul>
       </div>
 
       <div>
-        <h4 style={blockTitle}>Key Takeaways</h4>
-        <ul style={textList}>
+        <h4 style={blockLabel}>Key Takeaways</h4>
+        <ul style={listStyle}>
           {lesson.keyTakeaways.map((item, index) => (
-            <li key={`${lesson.id}-takeaway-${index}`}>{item}</li>
+            <li key={`${lesson.id}-takeaways-${index}`}>{item}</li>
           ))}
         </ul>
       </div>
 
       <div>
-        <h4 style={blockTitle}>Checkpoint</h4>
-        <ul style={textList}>
+        <h4 style={blockLabel}>Checkpoint</h4>
+        <ul style={listStyle}>
           {lesson.checkpoint.map((item, index) => (
             <li key={`${lesson.id}-checkpoint-${index}`}>{item}</li>
           ))}
@@ -320,14 +328,12 @@ function LessonSection({ lesson }: { lesson: LessonType }) {
 
 function ModuleSection({ module }: { module: ModuleType }) {
   return (
-    <section id={module.id} style={moduleCard}>
-      <div style={moduleHeader}>
-        <p style={sectionLabel}>Module</p>
-        <h2 style={moduleTitle}>{module.title}</h2>
-        <p style={moduleOverview}>{module.overview}</p>
-      </div>
+    <section id={module.id} style={sectionCard}>
+      <p style={sectionLabel}>Module</p>
+      <h2 style={sectionTitle}>{module.title}</h2>
+      <p style={sectionOverview}>{module.overview}</p>
 
-      <div style={lessonsGrid}>
+      <div style={lessonGrid}>
         {module.lessons.map((lesson) => (
           <LessonSection key={lesson.id} lesson={lesson} />
         ))}
@@ -337,58 +343,64 @@ function ModuleSection({ module }: { module: ModuleType }) {
 }
 
 export default function DistributedDatabasesCoursePage() {
+  const isNarrow =
+    typeof window !== "undefined" ? window.innerWidth < 1080 : false;
+
   return (
-    <div style={shell}>
-      <div style={page}>
-        <header style={heroCard}>
-          <span style={pill}>Learning Path</span>
-          <h1 style={heroTitle}>{distributedDatabaseCourse.title}</h1>
-          <p style={heroSubtitle}>{distributedDatabaseCourse.subtitle}</p>
+    <div style={pageStyle}>
+      <div style={containerStyle}>
+        <header style={heroStyle}>
+          <span style={badgeStyle}>Distributed Systems Learning</span>
+          <h1 style={heroTitleStyle}>{distributedDatabaseCourse.title}</h1>
+          <p style={heroSubtitleStyle}>{distributedDatabaseCourse.subtitle}</p>
 
-          <div style={infoGrid}>
-            <div style={infoCard}>
-              <p style={sectionLabel}>Who this is for</p>
-              <p style={sectionText}>{distributedDatabaseCourse.audience}</p>
+          <div style={quickInfoGrid}>
+            <div style={quickInfoCard}>
+              <p style={quickInfoLabel}>Audience</p>
+              <p style={quickInfoText}>{distributedDatabaseCourse.audience}</p>
             </div>
-
-            <div style={infoCard}>
-              <p style={sectionLabel}>How to use this page</p>
-              <p style={sectionText}>
-                Move lesson by lesson. Pause after each section and explain it
-                back to yourself before going forward.
+            <div style={quickInfoCard}>
+              <p style={quickInfoLabel}>Coverage</p>
+              <p style={quickInfoText}>
+                SQL, NoSQL, replication models, node failures, transactions,
+                quorums, and conflict resolution.
               </p>
             </div>
-
-            <div style={infoCard}>
-              <p style={sectionLabel}>Coverage</p>
-              <p style={sectionText}>
-                Distributed SQL, NoSQL models, replication, sharding,
-                transactions, and consistency tradeoffs.
+            <div style={quickInfoCard}>
+              <p style={quickInfoLabel}>Reading style</p>
+              <p style={quickInfoText}>
+                Use this like a structured guide. Read lesson by lesson and
+                revisit the revision section often.
               </p>
             </div>
           </div>
         </header>
 
-        <div style={layout}>
-          <aside style={sidebar}>
-            <h2 style={navTitle}>Course Contents</h2>
-            <ul style={navList}>
+        <div
+          style={{
+            ...mainLayout,
+            gridTemplateColumns: isNarrow ? "1fr" : mainLayout.gridTemplateColumns,
+          }}
+        >
+          <aside style={sidebarStyle}>
+            <h2 style={sidebarTitle}>Contents</h2>
+            <ul style={navListStyle}>
               <li>
-                <a href="#how-to-study" style={navItem}>
+                <a {...smoothNavProps("how-to-study")} style={navItemStyle}>
                   How to study this course
                 </a>
               </li>
 
               {distributedDatabaseCourse.modules.map((module) => (
                 <li key={module.id}>
-                  <a href={`#${module.id}`} style={navItem}>
+                  <a {...smoothNavProps(module.id)} style={navItemStyle}>
                     {module.title}
                   </a>
 
-                  <ul style={navSubList}>
+                  <ul style={navSubListStyle}>
                     {module.lessons.map((lesson) => (
                       <li key={lesson.id}>
-                        <a href={`#${lesson.id}`} style={navSubItem}>
+                        <a {...smoothNavProps(lesson.id)} style={navSubItemStyle}>
                           {lesson.title}
                         </a>
                       </li>
@@ -398,36 +410,30 @@ export default function DistributedDatabasesCoursePage() {
               ))}
 
               <li>
-                <a href="#final-revision" style={navItem}>
+                <a {...smoothNavProps("final-revision")} style={navItemStyle}>
                   Final revision
                 </a>
               </li>
             </ul>
-
-            <p style={mobileNote}>
-              Tip: keep this page open as a personal reading guide and revisit
-              the final revision section whenever you want a quick refresher.
-            </p>
           </aside>
 
-          <main style={contentWrap}>
-            <section id="how-to-study" style={moduleCard}>
-              <div style={moduleHeader}>
-                <p style={sectionLabel}>Start Here</p>
-                <h2 style={moduleTitle}>How to study this course</h2>
-                <p style={moduleOverview}>
-                  This course is meant to be read slowly. The goal is not just
-                  to recognize terms, but to understand why each concept exists
-                  and how it changes the design of a real distributed system.
-                </p>
-              </div>
+          <main style={contentStyle}>
+            <section id="how-to-study" style={sectionCard}>
+              <p style={sectionLabel}>Start Here</p>
+              <h2 style={sectionTitle}>How to study this course</h2>
+              <p style={sectionOverview}>
+                This page is designed to feel like a personal course rather than
+                a short note sheet. Read it in order first. After that, use the
+                navigation on the left to jump directly to topics you want to
+                revise.
+              </p>
 
-              <div style={lessonsGrid}>
+              <div style={lessonGrid}>
                 <article style={lessonCard}>
-                  <h3 style={lessonTitle}>Suggested learning rhythm</h3>
-                  <ul style={textList}>
+                  <h3 style={lessonTitle}>Suggested study rhythm</h3>
+                  <ul style={listStyle}>
                     {distributedDatabaseCourse.howToUse.map((item, index) => (
-                      <li key={`how-${index}`}>{item}</li>
+                      <li key={`study-${index}`}>{item}</li>
                     ))}
                   </ul>
                 </article>
@@ -438,30 +444,30 @@ export default function DistributedDatabasesCoursePage() {
               <ModuleSection key={module.id} module={module} />
             ))}
 
-            <section id="final-revision" style={finalCard}>
-              <div style={moduleHeader}>
-                <p style={sectionLabel}>Revision</p>
-                <h2 style={moduleTitle}>Final revision</h2>
-                <p style={moduleOverview}>
-                  Use this section when you want a fast pass through the most
-                  important ideas before diving back into the detailed lessons.
-                </p>
-              </div>
+            <section id="final-revision" style={finalSectionStyle}>
+              <p style={sectionLabel}>Revision</p>
+              <h2 style={sectionTitle}>Final revision</h2>
+              <p style={sectionOverview}>
+                Come back to this section when you want a quick but meaningful
+                pass through the most important ideas.
+              </p>
 
-              <div style={lessonCard}>
-                <ul style={textList}>
-                  {distributedDatabaseCourse.finalRevision.map((item, index) => (
-                    <li key={`revision-${index}`}>{item}</li>
-                  ))}
-                </ul>
+              <div style={lessonGrid}>
+                <article style={lessonCard}>
+                  <ul style={listStyle}>
+                    {distributedDatabaseCourse.finalRevision.map((item, index) => (
+                      <li key={`revision-${index}`}>{item}</li>
+                    ))}
+                  </ul>
+                </article>
               </div>
             </section>
           </main>
         </div>
 
-        <p style={footerText}>
-          Built as a long-form learning page for revisiting distributed database
-          fundamentals over time.
+        <p style={footerStyle}>
+          Clean light theme, smooth navigation, and structured lessons for
+          long-term reading.
         </p>
       </div>
     </div>
